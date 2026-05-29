@@ -1,0 +1,28 @@
+# 过滤STM32编译生成的文件
+output/
+*.crf
+*.d
+*.o
+*.axf
+*.bin
+*.hex
+*.elf
+*.map
+
+# 过滤IDE配置与临时文件
+*.uvguix.*
+*.uvoptx
+*.uvprojx.bak
+*.JLink*
+*.scvd
+
+# 过滤压缩包和大文件
+*.7z
+*.zip
+*.rar
+*.exe
+
+# 过滤系统临时文件
+Thumbs.db
+.DS_Store
+echo. > .gitignore
