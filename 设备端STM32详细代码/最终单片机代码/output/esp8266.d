@@ -30,6 +30,16 @@
 .\output\esp8266.o: .\fwlib\inc\misc.h
 .\output\esp8266.o: .\NET\device\inc\esp8266.h
 .\output\esp8266.o: .\hardware\inc\delay.h
+.\output\esp8266.o: .\FreeRTOS\include\FreeRTOS.h
+.\output\esp8266.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\output\esp8266.o: .\FreeRTOS\examples\template_configuration\FreeRTOSConfig.h
+.\output\esp8266.o: .\FreeRTOS\include\projdefs.h
+.\output\esp8266.o: .\FreeRTOS\include\portable.h
+.\output\esp8266.o: .\FreeRTOS\include\deprecated_definitions.h
+.\output\esp8266.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\output\esp8266.o: .\FreeRTOS\include\mpu_wrappers.h
+.\output\esp8266.o: .\FreeRTOS\include\task.h
+.\output\esp8266.o: .\FreeRTOS\include\list.h
 .\output\esp8266.o: .\hardware\inc\usart.h
 .\output\esp8266.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 .\output\esp8266.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -30,7 +30,6 @@
 .\output\main.o: .\fwlib\inc\misc.h
 .\output\main.o: .\NET\onenet\inc\onenet.h
 .\output\main.o: .\NET\device\inc\esp8266.h
-.\output\main.o: .\hardware\inc\delay.h
 .\output\main.o: .\hardware\inc\usart.h
 .\output\main.o: .\hardware\inc\led.h
 .\output\main.o: .\hardware\inc\key.h
@@ -38,3 +37,16 @@
 .\output\main.o: .\OLED\oled.h
 .\output\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+.\output\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\main.o: .\FreeRTOS\include\FreeRTOS.h
+.\output\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\output\main.o: .\FreeRTOS\examples\template_configuration\FreeRTOSConfig.h
+.\output\main.o: .\FreeRTOS\include\projdefs.h
+.\output\main.o: .\FreeRTOS\include\portable.h
+.\output\main.o: .\FreeRTOS\include\deprecated_definitions.h
+.\output\main.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\output\main.o: .\FreeRTOS\include\mpu_wrappers.h
+.\output\main.o: .\FreeRTOS\include\task.h
+.\output\main.o: .\FreeRTOS\include\list.h
+.\output\main.o: .\FreeRTOS\include\queue.h
+.\output\main.o: .\FreeRTOS\include\semphr.h

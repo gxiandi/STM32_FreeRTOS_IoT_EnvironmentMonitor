@@ -9,7 +9,7 @@ _Bool OneNET_RegisterDevice(void);
 
 _Bool OneNet_DevLink(void);
 
-void OneNet_SendData(void);
+void OneNet_SendData(u8 temperature, u8 humidity);
 
 void OneNET_Subscribe(void);
 

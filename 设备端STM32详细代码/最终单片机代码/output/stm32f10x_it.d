@@ -30,3 +30,13 @@
 .\output\stm32f10x_it.o: .\fwlib\inc\stm32f10x_wwdg.h
 .\output\stm32f10x_it.o: .\fwlib\inc\misc.h
 .\output\stm32f10x_it.o: .\hardware\inc\usart.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\FreeRTOS.h
+.\output\stm32f10x_it.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\output\stm32f10x_it.o: .\FreeRTOS\examples\template_configuration\FreeRTOSConfig.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\projdefs.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\portable.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\deprecated_definitions.h
+.\output\stm32f10x_it.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\mpu_wrappers.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\task.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\list.h

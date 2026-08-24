@@ -29,3 +29,13 @@
 .\output\delay.o: .\fwlib\inc\stm32f10x_wwdg.h
 .\output\delay.o: .\fwlib\inc\misc.h
 .\output\delay.o: .\hardware\inc\delay.h
+.\output\delay.o: .\FreeRTOS\include\FreeRTOS.h
+.\output\delay.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\output\delay.o: .\FreeRTOS\examples\template_configuration\FreeRTOSConfig.h
+.\output\delay.o: .\FreeRTOS\include\projdefs.h
+.\output\delay.o: .\FreeRTOS\include\portable.h
+.\output\delay.o: .\FreeRTOS\include\deprecated_definitions.h
+.\output\delay.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\output\delay.o: .\FreeRTOS\include\mpu_wrappers.h
+.\output\delay.o: .\FreeRTOS\include\task.h
+.\output\delay.o: .\FreeRTOS\include\list.h

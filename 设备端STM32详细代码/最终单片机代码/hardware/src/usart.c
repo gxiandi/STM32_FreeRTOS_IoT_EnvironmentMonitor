@@ -1,3 +1,23 @@
+/**
+	************************************************************
+	************************************************************
+	************************************************************
+	*	文件名： 	usart.c
+	*
+	*	作者： 		张继瑞
+	*
+	*	日期： 		2016-11-23
+	*
+	*	版本： 		V1.0
+	*
+	*	说明： 		单片机串口外设初始化，格式化打印
+	*
+	*	修改记录：	
+	************************************************************
+	************************************************************
+	************************************************************
+**/
+
 //硬件驱动
 #include "usart.h"
 #include "delay.h"
@@ -57,8 +77,8 @@ void Usart1_Init(unsigned int baud)
 	
 	nvic_initstruct.NVIC_IRQChannel = USART1_IRQn;
 	nvic_initstruct.NVIC_IRQChannelCmd = ENABLE;
-	nvic_initstruct.NVIC_IRQChannelPreemptionPriority = 0;
-	nvic_initstruct.NVIC_IRQChannelSubPriority = 2;
+	nvic_initstruct.NVIC_IRQChannelPreemptionPriority = 6;
+	nvic_initstruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_Init(&nvic_initstruct);
 
 }
@@ -112,7 +132,7 @@ void Usart2_Init(unsigned int baud)
 	
 	nvic_initstruct.NVIC_IRQChannel = USART2_IRQn;
 	nvic_initstruct.NVIC_IRQChannelCmd = ENABLE;
-	nvic_initstruct.NVIC_IRQChannelPreemptionPriority = 0;
+	nvic_initstruct.NVIC_IRQChannelPreemptionPriority = 6;
 	nvic_initstruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_Init(&nvic_initstruct);
 

@@ -29,4 +29,3 @@
 .\output\dht11.o: .\fwlib\inc\stm32f10x_usart.h
 .\output\dht11.o: .\fwlib\inc\stm32f10x_wwdg.h
 .\output\dht11.o: .\fwlib\inc\misc.h
-.\output\dht11.o: .\hardware\inc\delay.h

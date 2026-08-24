@@ -24,8 +24,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
 #include "usart.h"
-
-
+#include "FreeRTOS.h"
+#include "task.h"
 extern uint32_t SystickTime;
 extern __IO uint32_t TimeDisplay;
 
@@ -114,9 +114,10 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
-{
-}
+//void SVC_Handler(void)
+//{
+//	vPortSVCHandler();
+//}
 
 /**
   * @brief  This function handles Debug Monitor exception.
@@ -125,6 +126,7 @@ void SVC_Handler(void)
   */
 void DebugMon_Handler(void)
 {
+
 }
 
 /**
@@ -134,6 +136,7 @@ void DebugMon_Handler(void)
   */
 //void PendSV_Handler(void) //UCOS系统中不写在这里
 //{
+//	 xPortPendSVHandler();
 //}
 
 /**
@@ -141,11 +144,12 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
-{
-    //SystickTime_Increase();
-    //SystickTime++;
-}
+//void SysTick_Handler(void)
+//{
+//    //SystickTime_Increase();
+//    //SystickTime++;
+//	xPortSysTickHandler();
+//}
 
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */

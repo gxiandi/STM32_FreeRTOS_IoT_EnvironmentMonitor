@@ -1,3 +1,24 @@
+/**
+	************************************************************
+	************************************************************
+	************************************************************
+	*	文件名： 	onenet.c
+	*
+	*	作者： 		张继瑞
+	*
+	*	日期： 		2017-05-08
+	*
+	*	版本： 		V1.1
+	*
+	*	说明： 		与onenet平台的数据交互接口层
+	*
+	*	修改记录：	V1.0：协议封装、返回判断都在同一个文件，并且不同协议接口不同。
+	*				V1.1：提供统一接口供应用层使用，根据不同协议文件来封装协议相关的内容。
+	************************************************************
+	************************************************************
+	************************************************************
+**/
+
 //单片机头文件
 #include "stm32f10x.h"
 
@@ -351,31 +372,32 @@ _Bool OneNet_DevLink(void)
 	
 }
 extern u8 temp,humi;
-unsigned char OneNet_FillBuf(char *buf)
-{
-	
-	char text[48];
-	
-	memset(text, 0, sizeof(text));
-	
-	strcpy(buf, "{\"id\":\"123\",\"params\":{");
-	
-	memset(text, 0, sizeof(text));
-	sprintf(text, "\"temp\":{\"value\":%d},", temp);
-	strcat(buf, text);
-	
-	memset(text, 0, sizeof(text));
-	sprintf(text, "\"humi\":{\"value\":%d},", humi);
-	strcat(buf, text);
-	
-	memset(text, 0, sizeof(text));
-	sprintf(text, "\"led\":{\"value\":%s}", led_info.Led_Status ? "true" : "false");
-	strcat(buf, text);
-	
-	strcat(buf, "}}");
-	
-	return strlen(buf);
+// 修改前：
+// unsigned char OneNet_FillBuf(char *buf)
 
+// 修改后：
+unsigned char OneNet_FillBuf(char *buf, u8 temp, u8 humi)
+{
+    char text[48];
+    
+    memset(text, 0, sizeof(text));
+    strcpy(buf, "{\"id\":\"123\",\"params\":{");
+    
+    memset(text, 0, sizeof(text));
+    sprintf(text, "\"temp\":{\"value\":%d},", temp);   // ? 使用参数 temp
+    strcat(buf, text);
+    
+    memset(text, 0, sizeof(text));
+    sprintf(text, "\"humi\":{\"value\":%d},", humi);   // ? 使用参数 humi
+    strcat(buf, text);
+    
+    memset(text, 0, sizeof(text));
+    sprintf(text, "\"led\":{\"value\":%s}", led_info.Led_Status ? "true" : "false");
+    strcat(buf, text);
+    
+    strcat(buf, "}}");
+    
+    return strlen(buf);
 }
 
 //==========================================================
@@ -389,39 +411,34 @@ unsigned char OneNet_FillBuf(char *buf)
 //
 //	说明：		
 //==========================================================
-void OneNet_SendData(void)
-{
-	
-	MQTT_PACKET_STRUCTURE mqttPacket = {NULL, 0, 0, 0};												//协议包
-	
-	char buf[256];
-	
-	short body_len = 0, i = 0;
-	
-//	UsartPrintf(USART_DEBUG, "Tips:	OneNet_SendData-MQTT\r\n");
-	
-	memset(buf, 0, sizeof(buf));
-	
-	body_len = OneNet_FillBuf(buf);																	//获取当前需要发送的数据流的总长度
-	
-	if(body_len)
-	{
-		if(MQTT_PacketSaveData(PROID, DEVICE_NAME, body_len, NULL, &mqttPacket) == 0)				//封包
-		{
-			for(; i < body_len; i++)
-				mqttPacket._data[mqttPacket._len++] = buf[i];
-			
-			ESP8266_SendData(mqttPacket._data, mqttPacket._len);									//上传数据到平台
-//			UsartPrintf(USART_DEBUG, "Send %d Bytes\r\n", mqttPacket._len);
-			
-			MQTT_DeleteBuffer(&mqttPacket);															//删包
-		}
-		else
-			UsartPrintf(USART_DEBUG, "WARN:	EDP_NewBuffer Failed\r\n");
-	}
-	
-}
+// 修改前：
+// void OneNet_SendData(void)
 
+// 修改后：
+void OneNet_SendData(u8 temperature, u8 humidity)
+{
+    MQTT_PACKET_STRUCTURE mqttPacket = {NULL, 0, 0, 0};
+    char buf[256];
+    short body_len = 0, i = 0;
+    
+    memset(buf, 0, sizeof(buf));
+    
+    body_len = OneNet_FillBuf(buf, temperature, humidity);  // ? 传入参数
+    
+    if(body_len)
+    {
+        if(MQTT_PacketSaveData(PROID, DEVICE_NAME, body_len, NULL, &mqttPacket) == 0)
+        {
+            for(; i < body_len; i++)
+                mqttPacket._data[mqttPacket._len++] = buf[i];
+            
+            ESP8266_SendData(mqttPacket._data, mqttPacket._len);
+            MQTT_DeleteBuffer(&mqttPacket);
+        }
+        else
+            UsartPrintf(USART_DEBUG, "WARN: EDP_NewBuffer Failed\r\n");
+    }
+}
 //==========================================================
 //	函数名称：	OneNET_Publish
 //
@@ -540,6 +557,7 @@ void OneNet_RevPro(unsigned char *cmd)
 				cJSON_Delete(raw_json);
 				
 			}
+			break;
 			
 		case MQTT_PKT_PUBACK:														//发送Publish消息，平台回复的Ack
 		

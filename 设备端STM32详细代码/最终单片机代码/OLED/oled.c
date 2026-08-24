@@ -352,7 +352,10 @@ void OLED_Init(void)
  	GPIO_SetBits(GPIOB,GPIO_Pin_0|GPIO_Pin_1);	
 
 
-DelayMs(800);
+{
+    volatile unsigned int i = 800 * 12000;
+    while(i--);
+}
 OLED_WR_Byte(0xAE,OLED_CMD);//--display off
 	OLED_WR_Byte(0x00,OLED_CMD);//---set low column address
 	OLED_WR_Byte(0x10,OLED_CMD);//---set high column address

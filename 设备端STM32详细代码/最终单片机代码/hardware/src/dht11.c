@@ -7,38 +7,44 @@
 ********************LIGEN*************************/
 
 #include "dht11.h"
-#include "delay.h"
+#include "stm32f10x.h"
 
 #define DT GPIO_Pin_0
-      
+
+// 72MHz 下约 1us 延时，不依赖 SysTick，专用于 DHT11 时序
+static void DHT11_DelayUs(uint32_t us)
+{
+    volatile uint32_t count = us * 12;
+    while(count--);
+}      
+
 //复位DHT11
 void DHT11_Rst(void)	   
 {                 
 	DHT11_IO_OUT(); 	//SET OUTPUT
 	DHT11_DQ_OUT(0); 	//拉低DQ
-	DelayXms(20);    	//拉低至少18ms
+	DHT11_DelayUs(20000); //拉低至少18ms (原 DelayXms(20))
 	DHT11_DQ_OUT(1); 	//DQ=1 
-	DelayUs(30);     	//主机拉高20~40us
+	DHT11_DelayUs(30);  //主机拉高20~40us (原 DelayUs(30))
 }
 
 //等待DHT11的回应
 //返回1:未检测到DHT11的存在
 //返回0:存在
-uint8_t DHT11_Check(void) 	   
-{   
+uint8_t DHT11_Check(void) 	   	{   
 	uint8_t retry=0;
 	DHT11_IO_IN();//SET INPUT	 
     while (DHT11_DQ_IN&&retry<100)//DHT11会拉低40~80us
 	{
 		retry++;
-		DelayUs(1);
+		DHT11_DelayUs(1); // 替换原 DelayUs(1)
 	};	 
 	if(retry>=100)return 1;
 	else retry=0;
     while (!DHT11_DQ_IN&&retry<100)//DHT11拉低后会再次拉高40~80us
 	{
 		retry++;
-		DelayUs(1);
+		DHT11_DelayUs(1); // 替换原 DelayUs(1)
 	};
 	if(retry>=100)return 1;	    
 	return 0;
@@ -52,15 +58,15 @@ uint8_t DHT11_Read_Bit(void)
 	while(DHT11_DQ_IN&&retry<100)//等待变为低电平
 	{
 		retry++;
-		DelayUs(1);
+		DHT11_DelayUs(1); // 替换原 DelayUs(1)
 	}
 	retry=0;
 	while(!DHT11_DQ_IN&&retry<100)//等待变高电平
 	{
 		retry++;
-		DelayUs(1);
+		DHT11_DelayUs(1); // 替换原 DelayUs(1)
 	}
-	DelayUs(40);//等待40us
+	DHT11_DelayUs(40); //等待40us (替换原 DelayUs(40))
 	if(DHT11_DQ_IN)return 1;
 	else return 0;		   
 }
@@ -110,14 +116,13 @@ uint8_t DHT11_Read_Data(uint8_t *temp,uint8_t *humi)
 uint8_t DHT11_Init(void)
 {	 
  	GPIO_InitTypeDef  GPIO_InitStructure;	
- 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);	 //使能PG端口时钟
- 	GPIO_InitStructure.GPIO_Pin = DT;				 //PG11端口配置
+ 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);	 //使能PA端口时钟
+ 	GPIO_InitStructure.GPIO_Pin = DT;				 //PA0端口配置
  	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 //推挽输出
  	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
  	GPIO_Init(GPIOA, &GPIO_InitStructure);				 //初始化IO口
- 	GPIO_SetBits(GPIOA,DT);						 //PG11 输出高
+ 	GPIO_SetBits(GPIOA,DT);						 //PA0 输出高
 			    
 	DHT11_Rst();  //复位DHT11
 	return DHT11_Check();//等待DHT11的回应
 } 
-

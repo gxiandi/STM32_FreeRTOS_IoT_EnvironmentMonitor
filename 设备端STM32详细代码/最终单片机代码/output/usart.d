@@ -30,6 +30,16 @@
 .\output\usart.o: .\fwlib\inc\stm32f10x_wwdg.h
 .\output\usart.o: .\fwlib\inc\misc.h
 .\output\usart.o: .\hardware\inc\delay.h
+.\output\usart.o: .\FreeRTOS\include\FreeRTOS.h
+.\output\usart.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\output\usart.o: .\FreeRTOS\examples\template_configuration\FreeRTOSConfig.h
+.\output\usart.o: .\FreeRTOS\include\projdefs.h
+.\output\usart.o: .\FreeRTOS\include\portable.h
+.\output\usart.o: .\FreeRTOS\include\deprecated_definitions.h
+.\output\usart.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\output\usart.o: .\FreeRTOS\include\mpu_wrappers.h
+.\output\usart.o: .\FreeRTOS\include\task.h
+.\output\usart.o: .\FreeRTOS\include\list.h
 .\output\usart.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\output\usart.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 .\output\usart.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h

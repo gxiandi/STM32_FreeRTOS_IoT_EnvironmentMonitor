@@ -38,6 +38,15 @@
 .\output\onenet.o: .\NET\onenet\inc\hmac_sha1.h
 .\output\onenet.o: .\hardware\inc\usart.h
 .\output\onenet.o: .\hardware\inc\delay.h
+.\output\onenet.o: .\FreeRTOS\include\FreeRTOS.h
+.\output\onenet.o: .\FreeRTOS\examples\template_configuration\FreeRTOSConfig.h
+.\output\onenet.o: .\FreeRTOS\include\projdefs.h
+.\output\onenet.o: .\FreeRTOS\include\portable.h
+.\output\onenet.o: .\FreeRTOS\include\deprecated_definitions.h
+.\output\onenet.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\output\onenet.o: .\FreeRTOS\include\mpu_wrappers.h
+.\output\onenet.o: .\FreeRTOS\include\task.h
+.\output\onenet.o: .\FreeRTOS\include\list.h
 .\output\onenet.o: .\hardware\inc\led.h
 .\output\onenet.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 .\output\onenet.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h

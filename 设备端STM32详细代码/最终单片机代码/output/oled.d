@@ -32,3 +32,13 @@
 .\output\oled.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\oled.o: OLED\oledfont.h
 .\output\oled.o: .\hardware\inc\delay.h
+.\output\oled.o: .\FreeRTOS\include\FreeRTOS.h
+.\output\oled.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\output\oled.o: .\FreeRTOS\examples\template_configuration\FreeRTOSConfig.h
+.\output\oled.o: .\FreeRTOS\include\projdefs.h
+.\output\oled.o: .\FreeRTOS\include\portable.h
+.\output\oled.o: .\FreeRTOS\include\deprecated_definitions.h
+.\output\oled.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\output\oled.o: .\FreeRTOS\include\mpu_wrappers.h
+.\output\oled.o: .\FreeRTOS\include\task.h
+.\output\oled.o: .\FreeRTOS\include\list.h
